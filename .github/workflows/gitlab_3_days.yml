@@ -1,0 +1,77 @@
+name: Push to GitLab every 3 days
+
+on:
+  schedule:
+    - cron: "0 20 */3 * *" # 4:00 AM UTC+8
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  as-gist:
+    name: Sync as-gist
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync as-gist
+        run: |
+          git clone --branch master https://github.com/senzyo/as-gist.git
+          cd as-gist
+          git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/as-gist.git
+          git push -uf origin master:master
+
+  blog:
+    name: Sync blog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync blog
+        run: |
+          git clone --branch master https://github.com/senzyo/blog.git
+          cd blog
+          git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/blog.git
+          git push -uf origin master:master
+
+  senzyo:
+    name: Sync senzyo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync senzyo
+        run: |
+          git clone --branch master https://github.com/senzyo/senzyo.git
+          cd senzyo
+          git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/senzyo_sama.git
+          git push -uf origin master:master
+
+  sing-box-templates:
+    name: Sync sing-box-templates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync sing-box-templates
+        run: |
+          git clone --branch master https://github.com/senzyo/sing-box-templates.git
+          cd sing-box-templates
+          git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/sing-box-templates.git
+          git push -uf origin master:master
+
+  sync-git-repos:
+    name: Sync sync-git-repos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync sync-git-repos
+        run: |
+          git clone --branch master https://github.com/senzyo/sync-git-repos.git
+          cd sync-git-repos
+          git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/sync-git-repos.git
+          git push -uf origin master:master
+
+  webstack-hugo:
+    name: Sync webstack-hugo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync webstack-hugo
+        run: |
+          git clone --branch master https://github.com/senzyo/webstack-hugo.git
+          cd webstack-hugo
+          git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/webstack-hugo.git
+          git push -uf origin master:master
+
