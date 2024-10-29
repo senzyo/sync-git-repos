@@ -39,6 +39,17 @@ jobs:
           git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/senzyo_sama.git
           git push -uf origin master:master
 
+  sing-box-rules:
+    name: Sync sing-box-rules
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync sing-box-rules
+        run: |
+          git clone --branch master https://github.com/senzyo/sing-box-rules.git
+          cd sing-box-rules
+          git remote set-url origin https://oauth2:${{ secrets.GITLAB_PERSONAL_TOKEN }}@gitlab.com/senzyo_sama/sing-box-rules.git
+          git push -uf origin master:master
+
   sing-box-templates:
     name: Sync sing-box-templates
     runs-on: ubuntu-latest
