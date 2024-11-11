@@ -1,0 +1,41 @@
+name: Pull from upstream every 7 days
+
+on:
+  schedule:
+    - cron: "0 20 */7 * *" # 4:00 AM UTC+8
+  workflow_dispatch:
+
+jobs:
+  github-readme-stats:
+    name: Sync github-readme-stats
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync github-readme-stats
+        run: |
+          git clone --branch master https://github.com/anuraghazra/github-readme-stats.git
+          cd github-readme-stats
+          git remote set-url origin https://${{ secrets.PERSONAL_TOKEN }}@github.com/senzyo-desu/github-readme-stats.git
+          git push -uf origin master:master
+
+  mind-map:
+    name: Sync mind-map
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync mind-map
+        run: |
+          git clone --branch main https://github.com/wanglin2/mind-map.git
+          cd mind-map
+          git remote set-url origin https://${{ secrets.PERSONAL_TOKEN }}@github.com/senzyo-desu/mind-map.git
+          git push -uf origin main:main
+
+  rename:
+    name: Sync rename
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync rename
+        run: |
+          git clone --branch main https://github.com/JasonGrass/rename.git
+          cd rename
+          git remote set-url origin https://${{ secrets.PERSONAL_TOKEN }}@github.com/senzyo-desu/rename.git
+          git push -uf origin main:main
+
